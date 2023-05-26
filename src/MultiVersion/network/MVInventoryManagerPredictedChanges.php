@@ -26,7 +26,7 @@ namespace MultiVersion\network;
 use pocketmine\inventory\Inventory;
 use pocketmine\network\mcpe\protocol\types\inventory\ItemStack;
 
-final class MVInventoryManagerPredictedChanges{
+final class MVInventoryManagerPredictedChanges {
     /**
      * @var ItemStack[]
      * @phpstan-var array<int, ItemStack>
@@ -35,27 +35,29 @@ final class MVInventoryManagerPredictedChanges{
 
     public function __construct(
         private Inventory $inventory
-    ){}
+    ) {}
 
-    public function getInventory() : Inventory{ return $this->inventory; }
+    public function getInventory(): Inventory {
+        return $this->inventory;
+    }
 
     /**
      * @return ItemStack[]
      * @phpstan-return array<int, ItemStack>
      */
-    public function getSlots() : array{
+    public function getSlots(): array {
         return $this->slots;
     }
 
-    public function getSlot(int $slot) : ?ItemStack{
+    public function getSlot(int $slot): ?ItemStack {
         return $this->slots[$slot] ?? null;
     }
 
-    public function add(int $slot, ItemStack $item) : void{
+    public function add(int $slot, ItemStack $item): void {
         $this->slots[$slot] = $item;
     }
 
-    public function remove(int $slot) : void{
+    public function remove(int $slot): void {
         unset($this->slots[$slot]);
     }
 }

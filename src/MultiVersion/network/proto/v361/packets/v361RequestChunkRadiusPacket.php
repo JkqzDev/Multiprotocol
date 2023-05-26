@@ -7,17 +7,17 @@ use pocketmine\network\mcpe\protocol\serializer\PacketSerializer;
 
 class v361RequestChunkRadiusPacket extends RequestChunkRadiusPacket {
 
-    public static function fromLatest(RequestChunkRadiusPacket $pk) : self{
+    public static function fromLatest(RequestChunkRadiusPacket $pk): self {
         $npk = new self();
         $npk->radius = $pk->radius;
         return $npk;
     }
 
-    protected function decodePayload(PacketSerializer $in) : void{
+    protected function decodePayload(PacketSerializer $in): void {
         $this->radius = $in->getVarInt();
     }
 
-    protected function encodePayload(PacketSerializer $out) : void{
+    protected function encodePayload(PacketSerializer $out): void {
         $out->putVarInt($this->radius);
     }
 

@@ -20,9 +20,9 @@ use pocketmine\network\mcpe\protocol\types\inventory\TransactionData;
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemTransactionData;
 
-class v361InventoryTransactionPacket extends InventoryTransactionPacket{
+class v361InventoryTransactionPacket extends InventoryTransactionPacket {
 
-    protected function decodePayload(PacketSerializer $in) : void{
+    protected function decodePayload(PacketSerializer $in): void {
         $transactionType = $in->getUnsignedVarInt();
 
         $this->trData = match ($transactionType) {
@@ -36,14 +36,14 @@ class v361InventoryTransactionPacket extends InventoryTransactionPacket{
 
         $actions = [];
         $actionCount = $in->getUnsignedVarInt();
-        for($i = 0; $i < $actionCount; ++$i){
+        for ($i = 0; $i < $actionCount; ++$i) {
             $actions[] = (new v361NetworkInventoryAction())->read($in);
         }
 
         $this->requestId = $transactionType === MismatchTransactionData::ID ? $in->getUnsignedVarInt() : 0;
         $this->requestChangedSlots = [];
-        if($this->requestId !== 0){
-            for($i = 0, $len = $in->getUnsignedVarInt(); $i < $len; ++$i){
+        if ($this->requestId !== 0) {
+            for ($i = 0, $len = $in->getUnsignedVarInt(); $i < $len; ++$i) {
                 $this->requestChangedSlots[] = InventoryTransactionChangedSlotsHack::read($in);
             }
         }
@@ -52,7 +52,7 @@ class v361InventoryTransactionPacket extends InventoryTransactionPacket{
         ReflectionUtils::invoke(get_class($this->trData), $this->trData, "decodeData", $in);
     }
 
-    protected function encodePayload(PacketSerializer $out) : void{
+    protected function encodePayload(PacketSerializer $out): void {
         $out->putUnsignedVarInt($this->trData->getTypeId());
 
         $this->trData->encode($out);

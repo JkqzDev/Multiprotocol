@@ -13,25 +13,25 @@ use pocketmine\network\mcpe\serializer\ChunkSerializer;
 use pocketmine\world\format\Chunk;
 use pocketmine\world\format\SubChunk;
 
-class LatestChunkSerializerWrapper implements MVChunkSerializer{
+class LatestChunkSerializerWrapper implements MVChunkSerializer {
 
-	public function getSubChunkCount(Chunk $chunk) : int{
-		return ChunkSerializer::getSubChunkCount($chunk) + ChunkSerializer::LOWER_PADDING_SIZE;
-	}
+    public function getSubChunkCount(Chunk $chunk): int {
+        return ChunkSerializer::getSubChunkCount($chunk) + ChunkSerializer::LOWER_PADDING_SIZE;
+    }
 
-	public function serializeFullChunk(Chunk $chunk, PacketSerializerFactory $factory, ?string $tiles = null) : string{
-		return ChunkSerializer::serializeFullChunk($chunk, RuntimeBlockMapping::getInstance(), new PacketSerializerContext(GlobalItemTypeDictionary::getInstance()->getDictionary()), $tiles);
-	}
+    public function serializeFullChunk(Chunk $chunk, PacketSerializerFactory $factory, ?string $tiles = null): string {
+        return ChunkSerializer::serializeFullChunk($chunk, RuntimeBlockMapping::getInstance(), new PacketSerializerContext(GlobalItemTypeDictionary::getInstance()->getDictionary()), $tiles);
+    }
 
-	public function serializeSubChunk(SubChunk $subChunk, IRuntimeBlockMapping $blockMapper, PacketSerializer $stream, bool $persistentBlockStates) : void{
-		ChunkSerializer::serializeSubChunk($subChunk, RuntimeBlockMapping::getInstance(), $stream, $persistentBlockStates);
-	}
+    public function serializeSubChunk(SubChunk $subChunk, IRuntimeBlockMapping $blockMapper, PacketSerializer $stream, bool $persistentBlockStates): void {
+        ChunkSerializer::serializeSubChunk($subChunk, RuntimeBlockMapping::getInstance(), $stream, $persistentBlockStates);
+    }
 
-	public function serializeTiles(Chunk $chunk) : string{
-		return ChunkSerializer::serializeTiles($chunk);
-	}
+    public function serializeTiles(Chunk $chunk): string {
+        return ChunkSerializer::serializeTiles($chunk);
+    }
 
-	public function getPaddingSize(Chunk $chunk) : int{
-		return 0; // no padding, we don't support below-bedrock on older versions
-	}
+    public function getPaddingSize(Chunk $chunk): int {
+        return 0; // no padding, we don't support below-bedrock on older versions
+    }
 }

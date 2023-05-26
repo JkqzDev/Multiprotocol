@@ -25,17 +25,23 @@ namespace MultiVersion\network;
 
 use pocketmine\network\mcpe\protocol\types\inventory\ItemStack;
 
-final class MVItemStackInfo{
+final class MVItemStackInfo {
 
     public function __construct(
-        private ?int $requestId,
-        private int $stackId,
+        private ?int      $requestId,
+        private int       $stackId,
         private ItemStack $item
-    ){}
+    ) {}
 
-    public function getRequestId() : ?int{ return $this->requestId; }
+    public function getRequestId(): ?int {
+        return $this->requestId;
+    }
 
-    public function getStackId() : int{ return $this->stackId; }
+    public function getStackId(): int {
+        return $this->stackId;
+    }
 
-    public function getItemStack() : ItemStack{ return $this->item; }
+    public function getItemStack(): ItemStack {
+        return $this->item;
+    }
 }

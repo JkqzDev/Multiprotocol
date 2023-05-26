@@ -2,16 +2,16 @@
 
 namespace MultiVersion\network\proto\static_resources;
 
-interface IRuntimeBlockMapping{
+interface IRuntimeBlockMapping {
 
-	public function toRuntimeId(int $id, int $meta = 0) : int;
+    public function toRuntimeId(int $id, int $meta = 0): int;
 
-	/**
-	 * @param int $runtimeId
-	 *
-	 * @return int[] [id, meta]
-	 */
-	public function fromRuntimeId(int $runtimeId) : array;
+    /**
+     * @param int $runtimeId
+     *
+     * @return int[] [id, meta]
+     */
+    public function fromRuntimeId(int $runtimeId): array;
 
-	public function getBedrockKnownStates() : array;
+    public function getBedrockKnownStates(): array;
 }

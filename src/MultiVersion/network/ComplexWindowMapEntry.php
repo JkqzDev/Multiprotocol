@@ -25,7 +25,7 @@ namespace MultiVersion\network;
 
 use pocketmine\inventory\Inventory;
 
-final class ComplexWindowMapEntry{
+final class ComplexWindowMapEntry {
 
     /**
      * @var int[]
@@ -35,30 +35,35 @@ final class ComplexWindowMapEntry{
 
     /**
      * @param int[] $slotMap
+     *
      * @phpstan-param array<int, int> $slotMap
      */
     public function __construct(
         private Inventory $inventory,
-        private array $slotMap
-    ){
-        foreach($slotMap as $slot => $index){
+        private array     $slotMap
+    ) {
+        foreach ($slotMap as $slot => $index) {
             $this->reverseSlotMap[$index] = $slot;
         }
     }
 
-    public function getInventory() : Inventory{ return $this->inventory; }
+    public function getInventory(): Inventory {
+        return $this->inventory;
+    }
 
     /**
      * @return int[]
      * @phpstan-return array<int, int>
      */
-    public function getSlotMap() : array{ return $this->slotMap; }
+    public function getSlotMap(): array {
+        return $this->slotMap;
+    }
 
-    public function mapNetToCore(int $slot) : ?int{
+    public function mapNetToCore(int $slot): ?int {
         return $this->slotMap[$slot] ?? null;
     }
 
-    public function mapCoreToNet(int $slot) : ?int{
+    public function mapCoreToNet(int $slot): ?int {
         return $this->reverseSlotMap[$slot] ?? null;
     }
 }
